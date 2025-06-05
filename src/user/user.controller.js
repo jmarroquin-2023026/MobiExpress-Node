@@ -1,5 +1,5 @@
 import User from "./user.model.js";
-import { encrypt } from "../../utils.js/encrypt.js";
+import { checkPassword, encrypt } from "../../utils.js/encrypt.js";
 import { join} from 'path'
 import { unlink } from 'fs/promises'
 export const addUser = async(req,res)=>{
@@ -83,5 +83,33 @@ export const deleteUserPhotos=async(file,filePath)=>{
     } catch (error) {
         console.log(error);
         throw new Error("Error deleting the images");
+    }
+}
+
+export const updatePassword = async(req,res)=>{
+    try{
+        let {uid} = req.user
+        let {newPassword,oldPassword} = req.body
+        let user = await User.findById(uid)
+        if(!user) return res.status(404).send({success: false,message: 'User not found'})
+        let compare = await checkPassword(user.password, oldPassword)
+        if(!compare) return res.status(401).send(
+            {
+                success:false,
+                message: 'Old password is incorrect'
+            }
+        )
+        user.password = await encrypt(newPassword)
+        await user.save()
+
+        return res.send(
+            {
+                success:true,
+                message: 'Password updated successfully'
+            }
+        )
+    }catch(e){
+        console.error(e)
+        return res.status(500).send({success:false,message: 'General error Changing the password'})
     }
 }
