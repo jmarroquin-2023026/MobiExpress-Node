@@ -26,3 +26,15 @@ export const getUsers = async(req,res)=>{
         return res.status(500).send({success:false,message:'General error listing the users'})
     }
 }
+
+export const getUser = async(req,res)=>{
+    try {
+        let {id} = req.params
+        let user = await User.findById(id)
+        if(!user) return res.status(404).send({success:false,message:'User not found'})
+        return res.send({success:true,message:user})
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({success:false,message:'General error searching the user'})        
+    }
+}
