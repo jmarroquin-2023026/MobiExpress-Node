@@ -38,3 +38,24 @@ export const getUser = async(req,res)=>{
         return res.status(500).send({success:false,message:'General error searching the user'})        
     }
 }
+
+export const updateUser = async(req,res)=>{
+    try {
+        let {id}= req.params
+        let data = req.body
+        let user = await User.findByIdAndUpdate(id,{
+            name:data.name,
+            surname:data.surname,
+            email:data.email,
+            username:data.username,
+            phone:data.phone,
+            address:data.address
+        },{new:true})
+        if(!user) return res.status(404).send({success:false,message:'User not found'})
+        return res.send({success:true,message:'User updated successfully'})
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({success:false,message:'General error updating the user'})
+    }
+}
+
