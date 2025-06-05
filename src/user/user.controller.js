@@ -113,3 +113,42 @@ export const updatePassword = async(req,res)=>{
         return res.status(500).send({success:false,message: 'General error Changing the password'})
     }
 }
+
+
+export const changeProfilePicture = async(req,res,error)=>{
+    try {
+        if(req.file && req.filePath){
+                
+                const user = await User.findById(req.user.uid)
+                const filePath = join(req.filePath, user.profilePicture)
+                try{
+                    console.log(filePath);
+                    await unlink(filePath)
+                    user.profilePicture = req.file.filename
+                    await user.save()
+                    return res.send({success:true,message:'Profile picture changed'})
+                }catch(unlinkErr){
+                    console.error('Error deleting file', unlinkErr)
+                }
+            }
+            if(error.status === 400 || error.errors){ // === estricto | == abstracto
+                return res.status(400).send(
+                    {
+                        success: false,
+                        message: 'Error Changing the photo user',
+                        error
+                    }
+                )
+            }
+            return res.status(500).send(
+                {
+                    success: false,
+                    message: error.message
+                }
+            )
+        
+    } catch (error) {
+        console.log(error)
+        deleteFileOnError(error,req,res,'hi')
+    }
+ }
