@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url'
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url))
 
 export const getCurrentDir = (req,res,next)=>{
-    let fullPath = join(CURRENT_DIR,'../uploads/img/hotels')
+    let fullPath = join(CURRENT_DIR,'../uploads/img/users')
     req.filePath = fullPath
     next()
 }

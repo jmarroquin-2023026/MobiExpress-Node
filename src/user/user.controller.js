@@ -1,5 +1,7 @@
 import User from "./user.model.js";
 import { encrypt } from "../../utils.js/encrypt.js";
+import { join} from 'path'
+import { unlink } from 'fs/promises'
 export const addUser = async(req,res)=>{
     try {
         let data = req.body
@@ -59,3 +61,27 @@ export const updateUser = async(req,res)=>{
     }
 }
 
+export const deleteUser = async(req,res)=>{
+    try{
+        let{id} = req.params
+        let user = await User.findById(id)
+        if(!user) return res.status(404).send({success:false,message: 'User not found'})
+        await deleteUserPhotos(user.profilePicture,req.filePath)
+        await User.findByIdAndDelete(id)
+        return res.send({success:true,message:'User deleted successfully'})
+    }catch(e){
+        console.error(e)
+        return res.status(500).send({success:false, message:'General error',e})
+    }
+}
+
+export const deleteUserPhotos=async(file,filePath)=>{
+    try {
+        let rootPath = filePath
+        const deletePath = join(rootPath,file)
+        await unlink(deletePath)
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error deleting the images");
+    }
+}

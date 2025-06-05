@@ -13,6 +13,18 @@ export const isMyProfile=async(req,res,next)=>{
     }
 }
 
+export const isAdminOr = async(req,res,next)=>{
+    try {
+        let {user} = req
+        let {id} = req.params
+        if(user.role === 'ADMIN'){
+            next()
+        }else if(user.uid != id)return res.send({success:false,message:'This is not your own profile'})
+    } catch (error) {
+        console.log(error);
+        return res.status(401).send({success:false,message:'Error whit authenticating'})
+    }
+}
 export const userValidator =[
     body('name','Name is required').notEmpty().isLength({min:3,max:30}),
     body('surname','Surname is required').notEmpty().isLength({min:3,max:30}),
