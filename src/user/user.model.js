@@ -31,10 +31,10 @@ const userSchema = Schema({
         minlegth: [5,'Password must have at least 5 characters']
     },
     phone:{
-        type:Number,
+        type:String,
         required:[true,'Phone is required'],
-        minlegth:[8,'The phone number must have at least 8 characters'],
-        maxlegth:[8,`Can't overcome 8 characters`]
+        minlegth:[13,'The phone number must have at least 8 characters'],
+        maxlegth:[13,`Can't overcome 8 characters`]
     },
     role:{
         type: String,
@@ -43,7 +43,7 @@ const userSchema = Schema({
         required: [true,'Role is required'],
         default: 'CLIENT',
     },
-    adress:{
+    address:{
         type:String,
         required:[true,'Address is required'],
         minlegth:[20,'Address must have at least 20 characters'],

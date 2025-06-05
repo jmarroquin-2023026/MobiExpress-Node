@@ -31,18 +31,8 @@ export const isClient =async(req,res,next)=>{
 export const isAdmin =async(req,res,next)=>{
     try {
         const {user}=req
+        
         if(!user|| user.role !== 'ADMIN') return res.status(403).send({success:false,message:`You dont have access ${user.username}`})
-        next()
-    } catch (error) {
-        console.error(error);
-        return res.status(401).send({success:false,message:'Error whit authorization'})
-    }
-}
-//Funcion que valida si es Hotel owner
-export const isHotelOwner =async(req,res,next)=>{
-    try {
-        const {user}=req
-        if(!user|| user.role !== 'HOTELOWNER') return res.status(403).send({success:false,message:`You dont have access ${user.username}`})
         next()
     } catch (error) {
         console.error(error);
