@@ -6,7 +6,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import { limiter } from '../middlewares/rate.limit.js'
 import userRoutes from '../src/user/user.routes.js'
-
+import authRoutes from '../src/auth/auth.routes.js'
 
 
 const configs = (app)=>{
@@ -19,7 +19,8 @@ const configs = (app)=>{
 }
 
 const routes = (app)=>{ 
-   app.use('v1/user',userRoutes) 
+   app.use('/v1/user',userRoutes)
+   app.use('/v1',authRoutes)
 }
 
 export const initServer = ()=>{
