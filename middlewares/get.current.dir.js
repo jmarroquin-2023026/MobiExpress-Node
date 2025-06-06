@@ -8,3 +8,9 @@ export const getCurrentDir = (req,res,next)=>{
     req.filePath = fullPath
     next()
 }
+
+export const getCurrentDirCategory = (req,res,next)=>{
+    let fullPath = join(CURRENT_DIR,'../uploads/img/categories')
+    req.filePath = fullPath
+    next()
+}

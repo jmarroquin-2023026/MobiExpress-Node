@@ -1,6 +1,6 @@
 import { body } from "express-validator";
-import { existsEmail,existsUser } from "../utils.js/db.validators.js";
-import { validateErrors, validateErrorsWhitoutFiles } from "./validate.error.js";
+import { existCategory, existsEmail,existsUser } from "../utils.js/db.validators.js";
+import { validateErrors,validateErrorsGeneral, validateErrorsWhitoutFiles } from "./validate.error.js";
 export const isMyProfile=async(req,res,next)=>{
     try {
         let {id} = req.params
@@ -43,5 +43,17 @@ export const updatedUserValidator =[
     body('username','Username is required').optional().notEmpty().isLength({min:5,max:15}).custom(existsUser),
     body('phone','Phone is required').optional().notEmpty().isLength({min:13,max:13}),
     body('address','Adress is required').optional().notEmpty().isLength({min:20,max:200}),
+    validateErrorsWhitoutFiles
+]
+
+export const categoryValidator=[
+    body('name','Name of category is required').optional().notEmpty().isLength({min:3,max:50}).custom(existCategory),
+    body('description','Description of category is required').optional().notEmpty().isLength({min:10,max:150}),
+    validateErrors
+]
+
+export const updateCategoryValidator=[
+    body('name').optional().notEmpty().custom((category,{req})=>existCategory(category,{_id:req.params.id})),
+    body('description').optional().notEmpty().isLength({min:3,max:50}),
     validateErrorsWhitoutFiles
 ]

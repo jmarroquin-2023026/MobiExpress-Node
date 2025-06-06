@@ -37,4 +37,5 @@ const multerConfig = (destinationPath) =>{
 }
 
 export const uploadProfilePicture = multerConfig('../uploads/img/users')
+export const uploadCategoryPicture= multerConfig('../uploads/img/categories')
 
