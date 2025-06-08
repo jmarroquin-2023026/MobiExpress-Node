@@ -55,5 +55,7 @@ export const categoryValidator=[
 export const updateCategoryValidator=[
     body('name').optional().notEmpty().custom((category,{req})=>existCategory(category,{_id:req.params.id})),
     body('description').optional().notEmpty().isLength({min:3,max:50}),
+    body('picture').optional().notEmpty(),
+    validateErrors,
     validateErrorsWhitoutFiles
 ]

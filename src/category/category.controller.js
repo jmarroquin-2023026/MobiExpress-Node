@@ -1,13 +1,16 @@
+import { existsSync } from "fs"
 import Category from "./category.model.js"
+import { unlink } from 'fs/promises'
+import { join} from 'path'
 
 export const defaultCategories= async()=>{
     try{
         const categories=await Category.countDocuments()
         if(categories===0){
             const defaultCategory=[
-                {name:'Mobiliario para eventos',description:'Todo tipo de mobiliario para distintos eventos'},
-                {name:'Decoración',description:'Materiales decorativos para eventos'},
-                {name:'Cristaleria',description:'Productos de vidrio y cristal ideales para eventos especiales'},
+                {name:'Mobiliario para eventos',description:'Todo tipo de mobiliario para distintos eventos', picture:'categoria-mobiliario.jpeg'},
+                {name:'Decoración',description:'Materiales decorativos para eventos',picture:'categoria-decoracion.jpg'},
+                {name:'Cristaleria',description:'Productos de vidrio y cristal ideales para eventos especiales',picture:'categoria-cristaleria.jpeg'},
                 {name:'General',description:'Categoria genral de productos'}
             ]
             await Category.insertMany(defaultCategory)
@@ -87,33 +90,39 @@ export const findCategory=async(req,res)=>{
 
 export const updateCategory = async (req, res) => {
     try {
-        const { id } = req.params;
-        const data = req.body;
-        if (req.file) {
-            const photoFilename = req.file.filename;
-            data.picture = photoFilename
-        }
+        const { id } = req.params
+        const data = req.body
 
-        const updatedCategory = await Category.findByIdAndUpdate(id, data, { new: true });
-
-        if (!updatedCategory) {
+        const existingCategory = await Category.findById(id)
+        if (!existingCategory) {
             return res.status(404).send({
                 success: false,
                 message: 'Category not found',
             })
         }
 
+        if (req.file && req.filePath) {
+            const oldImagePath = join(req.filePath, existingCategory.picture)
+            try {
+                if (existingCategory.picture && existsSync(oldImagePath)) {
+                    await unlink(oldImagePath)
+                }
+            } catch (e) {
+                console.error('Error al borrar imagen', e)
+            }
+            data.picture = req.file.filename
+        }
 
+        const updatedCategory = await Category.findByIdAndUpdate(id, data, { new: true })
         return res.status(200).send({
             success: true,
             message: 'Category updated successfully',
             updatedCategory
         })
     } catch (e) {
-        console.error(e);
         return res.status(500).send({
+            success: false,
             message: 'General error updating category',
-            e,
         })
     }
 }
@@ -136,13 +145,22 @@ export const deleteCategory=async(req,res)=>{
                 message:'Category not found'
             }
         )
-        await deleteUserPhotos(user.profilePicture,req.filePath)
-        return res.status(200).send(
-            {
-                success:true,
-                message:'Category deleted successfully'
+
+         if (deletedCategory.picture && req.filePath) {
+            const filePath = join(req.filePath, deletedCategory.picture)
+            try {
+                if (existsSync(filePath)) {
+                    await unlink(filePath)
+                }
+            } catch (e) {
+                console.error('Error deleting category image:', e)
             }
-        )
+        }
+        return res.status(200).send({
+            success: true,
+            message: 'Category deleted successfully'
+        })
+
     }catch(e){
         return res.status(500).send({message:'General error deleting category',e})
     }
