@@ -59,3 +59,36 @@ export const updateCategoryValidator=[
     validateErrors,
     validateErrorsWhitoutFiles
 ]
+
+export const addProductValidator = [
+    body('name', 'Name cannot be empty')
+        .notEmpty()
+        .toLowerCase()
+        .custom(existProduct),
+    body('description', 'Description cannot be empty')
+        .notEmpty()
+        .isLength({max:50}),
+    body('price','Price cannot be empty')
+        .notEmpty(),
+    body('category','Category not exist')
+        .notEmpty(),
+    body('stock','Stock cannot be empty')
+        .notEmpty(),
+    body('datesAvalible','Dates Avalible cannot be empty')
+        .notEmpty(),
+    body('discount')
+        .optional(),
+    validateErrors
+]
+gh
+export const productUpdateValidator=[
+    body('name','Name cannot be empty').notEmpty().toLowerCase().custom(existProduct),
+    body('description','Description cannot be empty').notEmpty(),
+    body('price','Price cannot be empty').notEmpty(),
+    body('category','Category cannot be empty').notEmpty(),
+    body('stock','Stock cannot be empty').notEmpty(),
+    body('datesAvalible','Dates Avalible cannot be empty').notEmpty(),
+    body('discount')
+    .optional(),
+    validateErrors
+]
