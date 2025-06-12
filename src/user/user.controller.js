@@ -2,6 +2,32 @@ import User from "./user.model.js";
 import { checkPassword, encrypt } from "../../utils.js/encrypt.js";
 import { join} from 'path'
 import { unlink } from 'fs/promises'
+
+const addAdmin = async () => {
+    try {
+        const defaultAdmin = await User.findOne({role: 'ADMIN'})
+    if (!defaultAdmin) {
+        const usuarioAdmin = new User({
+                name: 'Diego',
+                surname: 'Medina',
+                username: `${process.env.ADMIN_USER}`,
+                email: `${process.env.ADMIN_EMAIL}`,
+                password: await encrypt(`${process.env.ADMIN_PASSWORD}`),
+                phone: '45910878',
+                role: "ADMIN",
+                address: '52av 4-83 sector sur zona 10 scp',
+                profilePicture: ''
+            })
+            await usuarioAdmin.save()
+            console.log('Default administrator added succesfully')
+        }
+    } catch (e) {
+        console.error('General error', e)
+    }
+}
+ 
+addAdmin()
+
 export const addUser = async(req,res)=>{
     try {
         let data = req.body

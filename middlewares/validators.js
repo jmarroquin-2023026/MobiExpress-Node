@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { existCategory, existsEmail,existsUser } from "../utils.js/db.validators.js";
+import { existCategory, existsEmail,existsUser, existProduct } from "../utils.js/db.validators.js";
 import { validateErrors,validateErrorsGeneral, validateErrorsWhitoutFiles } from "./validate.error.js";
 export const isMyProfile=async(req,res,next)=>{
     try {
@@ -80,14 +80,14 @@ export const addProductValidator = [
         .optional(),
     validateErrors
 ]
-gh
+
 export const productUpdateValidator=[
-    body('name','Name cannot be empty').notEmpty().toLowerCase().custom(existProduct),
-    body('description','Description cannot be empty').notEmpty(),
-    body('price','Price cannot be empty').notEmpty(),
-    body('category','Category cannot be empty').notEmpty(),
-    body('stock','Stock cannot be empty').notEmpty(),
-    body('datesAvalible','Dates Avalible cannot be empty').notEmpty(),
+    body('name','Name cannot be empty').optional().notEmpty().toLowerCase().custom(existProduct),
+    body('description','Description cannot be empty').optional().notEmpty(),
+    body('price','Price cannot be empty').optional().notEmpty(),
+    body('category','Category cannot be empty').optional().notEmpty(),
+    body('stock','Stock cannot be empty').optional().notEmpty(),
+    body('datesAvalible','Dates Avalible cannot be empty').optional().notEmpty(),
     body('discount')
     .optional(),
     validateErrors

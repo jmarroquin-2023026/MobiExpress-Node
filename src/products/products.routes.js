@@ -1,16 +1,18 @@
 import { Router } from "express";
-import { addProduct, getByCategory, getByName, getProduct, updateProduct, deleteProduct } from "./products.controller";
-import { isAdmin, validateJwt } from "../../middlewares/validate.jwt";
-import { addProductValidator, productUpdateValidator } from "../../middlewares/validators";
-/* import { uploadCategoryPicture, } from "../../middlewares/multer.upload.js";
+import { addProduct, getByCategory, getByName, getProduct, updateProduct, deleteProduct } from "./products.controller.js";
+import { isAdmin, validateJwt } from "../../middlewares/validate.jwt.js";
+import { addProductValidator, productUpdateValidator } from "../../middlewares/validators.js";
+import { uploadProductPicture } from "../../middlewares/multer.upload.js";
 import { deleteFileOnError } from "../../middlewares/delete.file.on.error.js";
-import { getCurrentDirCategory } from "../../middlewares/get.current.dir.js"; */
+import { getCurrentDirProduct } from "../../middlewares/get.current.dir.js";
 
 const api = Router()
 
-api.post('/addProduct',[isAdmin, validateJwt, addProductValidator],addProduct)
+api.post('/addProduct',[validateJwt, isAdmin, uploadProductPicture.array('images', 3), addProductValidator, deleteFileOnError],addProduct)
 api.get('/getProduct', getProduct)
 api.get('/getByCategory/:id', getByCategory)
 api.get('/getByName/:name', getByName)
-api.put('/updateProduct/:id', [isAdmin, validateJwt, productUpdateValidator],updateProduct)
-api.delete('/deleteProduct/:id', [isAdmin, validateJwt], deleteProduct)
+api.put('/updateProduct/:id', [validateJwt, isAdmin, uploadProductPicture.array('images',3), productUpdateValidator, deleteFileOnError],updateProduct)
+api.delete('/deleteProduct/:id', [validateJwt,isAdmin,getCurrentDirProduct], deleteProduct)
+
+export default api

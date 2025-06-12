@@ -35,7 +35,7 @@
         },
         images:[{
             type:String,
-            required:[true, 'Product image is required']
+            required:[false, 'Product image is required']
         }]
     },
         {versionKey: false}

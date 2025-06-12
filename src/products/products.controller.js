@@ -1,5 +1,9 @@
 import Product from './products.model.js'
 import Category from '../category/category.model.js'
+import { join} from 'path'
+import { existsSync } from "fs"
+
+
 
 export const addProduct = async (req, res) => {
     try {
@@ -18,7 +22,7 @@ export const addProduct = async (req, res) => {
             }
         ) 
         let product = new Product({ ...data,category:cat._id })
-        product.image = req.file.filename ?? null
+        product.images = req.files?.map(file => file.filename) || []
         await product.save()
         product = await Product.findById(product._id).populate('category', 'name -_id')
         return res.status(201).send(
@@ -119,6 +123,11 @@ export const updateProduct = async(req,res)=>{
         )   
         let {id} =req.params
         let data =req.body
+        if (req.files && req.files.length > 0) {
+            const imagesFileNames = req.files.map(file => file.filename)
+            data.images = imagesFileNames;
+
+        }
         if (data.Category) {
             let category =await User.findById(data.Category).populate('category', 'name -_id')
             if (!category) return res.status(400).send(
@@ -142,40 +151,6 @@ export const updateProduct = async(req,res)=>{
         return res.status(500).send({message: 'General Error', e})
     }
 }
-
-/* export const changeProductImage = async(req,res,error)=>{
-    try {
-        if(req.file && req.filePath){
-                const product = await Product.findById(req.user.uid)
-                const filePath = join(req.filePath, product.profilePicture)
-                try{
-                    console.log(filePath)
-                    await unlink(filePath)
-                    product.profilePicture = req.file.filename
-                    await product.save()
-                    return res.send({success:true,message:'Procuct image changed'})
-                }catch(unlinkErr){
-                    console.error('Error deleting file', unlinkErr)
-                }
-        }
-        if(error.status === 400 || error.errors)return res.status(400).send(
-            {
-                        success: false,
-                        message: 'Error Changing the product image',
-                        error
-            }
-        )
-        return res.status(500).send(
-            {
-                    success: false,
-                    message: error.message
-            }
-        )
-    } catch (e) {
-        console.log(e)
-        deleteFileOnError(e,req,res,'hi')
-    }
-} */
 
 export const deleteProduct = async(req, res)=>{
     try {
