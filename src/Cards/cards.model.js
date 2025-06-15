@@ -30,7 +30,7 @@ const cardSchema = Schema(
     }
 )
 
-userSchema.methods.toJSON = function() {
+cardSchema.methods.toJSON = function() {
     const { __v, ...card } = this.toObject();
     return card;
 }

@@ -1,6 +1,6 @@
 import Bill from './bill.model.js'
 
-export const addBill=async(req,res)=>{
+/* export const addBill=async(req,res)=>{
     try{
         const user=req.user.uid;
         const {cartId,NIT}=req.body
@@ -50,11 +50,25 @@ export const addBill=async(req,res)=>{
         console.error(e)
         return res.status(500).send({message:'Internal server error',e})
     }
+} */
+export const addBill = async (req, res) => {
+    try {
+        const data = req.body
+        const newBill = new Bill(data)
+        await newBill.save()
+        return res.status(200).send({
+            success: true,
+            message: 'Bill added successfully',
+            bill: newBill
+        })
+    } catch (e) {
+        return res.status(500).send({ message: 'Error adding bill', e })
+    }
 }
 
-export const getBillByUser=async(req,res)=>{
+/* export const getBillByUser=async(req,res)=>{
     try{
-        const user=req.user.uid
+        const user=req.user._id
         const{limit=20,skip=0}=req.query
         const bills=await Bill.find({user}).select(' -__v')
         .populate({
@@ -80,6 +94,27 @@ export const getBillByUser=async(req,res)=>{
         console.error(e)
         return res.status(500).send({message:'Internal server error',e})
     }
+} */
+export const getBillByUser=async(req,res)=>{
+    try{
+        const {id}=req.params
+        const bill=await Bill.findById(id)
+        if(!bill)return res.status(404).send(
+            {
+                success:false,
+                message:'Bill not found, try again',
+            }
+        )
+        return res.status(200).send(
+            {
+                success:true,
+                message:'Bill found',
+                bill
+            }
+        )
+    }catch(e){
+        return res.status(500).send({message:'General error with obtaining bill',e})
+    }
 }
 
 export const updateBill = async (req, res) => {
@@ -94,7 +129,7 @@ export const updateBill = async (req, res) => {
         const newBill = new Bill(
             {
                 user: bill.user,
-                purchase: bill.purchase,
+                /* purchase: bill.purchase, */
                 client: bill.client,
                 products: bill.products,
                 total: bill.total,

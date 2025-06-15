@@ -4,33 +4,39 @@ const billSchema = new Schema(
     {
         date: {
             type: Date,
-            default: Date.now
+            default: Date.now,
+            required: true
         },
         NIT: {
             type: String,
-            maxLength: [9, "Can't be more than 9 characters"]
+            maxLength: [9, "Can't be more than 9 characters"],
+            required: true
         },
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true
         },
-        purchase: {
+        /*purchase: {
             type: Schema.Types.ObjectId,
             ref: 'ShoppingCart',
             required: true
-        },
+        },*/
         products:[{
-                product: { 
+                products: { 
                     type: Schema.Types.ObjectId, 
                     ref:'Product', 
                     name: String,
                     price: Number,
-                    quantity: Number
+                    required: true
+                },
+                quantity:{
+                     type:Number
                 }
             }],
         total: {
-            type:Number
+            type:Number,
+            required: true
         },
         status: {
             type: Boolean,
