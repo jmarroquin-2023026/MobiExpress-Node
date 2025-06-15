@@ -9,6 +9,7 @@ import userRoutes from '../src/user/user.routes.js'
 import authRoutes from '../src/auth/auth.routes.js'
 import categoryRoutes from '../src/category/category.routes.js'
 import productsRoutes from '../src/products/products.routes.js'
+import orderRoutes from '../src/order/order.routes.js'
 
 
 const configs = (app)=>{
@@ -25,6 +26,7 @@ const routes = (app)=>{
    app.use('/v1',authRoutes)
    app.use('/v1/category',categoryRoutes)
    app.use('/v1/products', productsRoutes)
+   app.use('/v1/order',orderRoutes)
 }
 
 export const initServer = ()=>{
