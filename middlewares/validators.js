@@ -92,3 +92,32 @@ export const productUpdateValidator=[
     .optional(),
     validateErrors
 ]
+
+export const addCardValidator=[
+    body('titular','Titular cannot be empty').optional().notEmpty(),
+    body('number','Number cannot be empty').optional().notEmpty(),
+    body('expirationDate','Expiration Date cannot be empty').optional().notEmpty(),
+    body('cvv','CVV cannot be empty').optional().notEmpty(),
+    validateErrors
+]
+
+export const addBillValidator=[
+    body('date','Date cannot be empty').optional().notEmpty(),
+    body('NIT','NIT cannot be empty').optional().notEmpty().isLength({max:9}),
+    body('user','User cannot be empty').optional().notEmpty(),
+    body('products','Products cannot be empty').optional().notEmpty(),
+    body('total','Total cannot be empty').optional().notEmpty(),
+    body('status','Status cannot be empty').optional().notEmpty(),
+    validateErrors
+]
+
+
+export const billUpdateValidator=[
+    body('date','Date cannot be empty').optional().notEmpty(),
+    body('NIT','NIT cannot be empty').optional().notEmpty().isLength({max:9}),
+    body('user','User cannot be empty').optional().notEmpty(),
+    body('products','Products cannot be empty').optional().notEmpty(),
+    body('total','Total cannot be empty').optional().notEmpty(),
+    body('status','Status cannot be empty').optional().notEmpty(),
+    validateErrors
+]
