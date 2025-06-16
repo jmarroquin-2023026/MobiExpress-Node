@@ -32,6 +32,9 @@ const billSchema = new Schema(
                 },
                 quantity:{
                      type:Number
+                },
+                subTotal:{
+                    type:Number
                 }
             }],
         total: {

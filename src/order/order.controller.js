@@ -1,6 +1,6 @@
 import Order from './order.model.js'
 import Products from '../products/products.model.js'
-
+import Bill from '../bills/bill.model.js'
 export const calculateDisponibility = async(req,res)=>{
     try{
         let {consultDate, order} = req.body
@@ -58,13 +58,13 @@ export const addOrder = async (req, res) => {
             total += product.price * quantity
         }
 
-        for (const item of products) {
+        /* for (const item of products) {
             const { product: productId, quantity } = item
 
             const product = await Products.findById(productId)
             product.stock -= quantity
             await product.save()
-        }
+        } */
 
         const order = new Order({
             user,
@@ -74,7 +74,8 @@ export const addOrder = async (req, res) => {
         })
 
         await order.save()
-
+        /*aeait makeBill(data.nit) */
+        await makeBill(user,products,total)
         return res.status(201).send({
             success: true,
             message: "Order created successfully",
@@ -185,5 +186,33 @@ export const updateOrderStatus = async (req, res) => {
     } catch (e) {
         console.error(e)
         return res.status(500).send({ message: "Internal server error", e })
+    }
+}
+
+export const makeBill= async(user,products,total)=>{
+    try {
+        let billProducts=[]
+        for (const item of products){
+            const product = await Products.findById(item.productId)
+            let billItem = {
+                products:item.productId,
+                quantity:item.quantity,
+                subTotal:item.quantity * product.price
+            }
+            billProducts.push(billItem)
+        }
+        let bill = new Bill(
+            {
+                date:Date.now,
+                NIT:'123456789',
+                user:user,
+                products:billProducts,
+                total:total,
+                status:true
+            }
+        )
+        await bill.save()
+    } catch (error) {
+        return res.status(500).send({success:false,message:'General error making the bill'})
     }
 }
