@@ -10,7 +10,8 @@ const billSchema = new Schema(
         NIT: {
             type: String,
             maxLength: [9, "Can't be more than 9 characters"],
-            required: true
+            required: false,
+            default:"C/F"
         },
         user: {
             type: Schema.Types.ObjectId,
