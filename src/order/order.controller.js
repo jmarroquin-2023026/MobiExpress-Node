@@ -58,13 +58,13 @@ export const addOrder = async (req, res) => {
             total += product.price * quantity
         }
 
-        /* for (const item of products) {
+        for (const item of products) {
             const { product: productId, quantity } = item
 
             const product = await Products.findById(productId)
             product.stock -= quantity
             await product.save()
-        } */
+        } 
 
         const order = new Order({
             user,
@@ -74,8 +74,7 @@ export const addOrder = async (req, res) => {
         })
 
         await order.save()
-        /*aeait makeBill(data.nit) */
-        await makeBill(user,products,total)
+        await makeBill(user,products,total,data.nit)
         return res.status(201).send({
             success: true,
             message: "Order created successfully",
@@ -189,7 +188,7 @@ export const updateOrderStatus = async (req, res) => {
     }
 }
 
-export const makeBill= async(user,products,total)=>{
+export const makeBill= async(user,products,total,nit)=>{
     try {
         let billProducts=[]
         for (const item of products){
@@ -204,7 +203,7 @@ export const makeBill= async(user,products,total)=>{
         let bill = new Bill(
             {
                 date:Date.now,
-                NIT:'123456789',
+                NIT:nit,
                 user:user,
                 products:billProducts,
                 total:total,
