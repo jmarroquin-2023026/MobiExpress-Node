@@ -34,10 +34,10 @@ export const existProduct = async(name, product)=>{
     }
 }
 
-export const existCard = async(name, card)=>{
-    const alreadyCard = await Card.findOne({name})
-    if(alreadyCard && alreadyCard._id != card._id){
-        console.error(`Card ${titular} is already exist`)
-        throw new Error(`Card ${titular} is already exist`)
+export const existCard = async(number)=>{
+    const alreadyCard = await Card.findOne({number})
+    if(alreadyCard){
+        console.error(`Card ${number} is already exist`)
+        throw new Error(`Card ${number} is already exist`)
     }
 }

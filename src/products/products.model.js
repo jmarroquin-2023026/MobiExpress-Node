@@ -9,11 +9,11 @@
             type: String,
             required: [true, 'Description is required']
         },
-        category: {
+        category: [{
             type: Schema.Types.ObjectId,
             ref: 'Category',
             required: [true, 'Category is required']
-        },
+        }],
         price: {
             type: Number,
             required: [true, 'Price is required']

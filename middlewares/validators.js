@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { existCategory, existsEmail,existsUser, existProduct } from "../utils.js/db.validators.js";
+import { existCategory, existsEmail,existsUser, existProduct, existCard } from "../utils.js/db.validators.js";
 import { validateErrors,validateErrorsGeneral, validateErrorsWhitoutFiles } from "./validate.error.js";
 export const isMyProfile=async(req,res,next)=>{
     try {
@@ -95,10 +95,9 @@ export const productUpdateValidator=[
 
 export const addCardValidator=[
     body('titular','Titular cannot be empty').optional().notEmpty(),
-    body('number','Number cannot be empty').optional().notEmpty(),
+    body('number','Number cannot be empty').optional().notEmpty().custom(existCard),
     body('expirationDate','Expiration Date cannot be empty').optional().notEmpty(),
-    body('cvv','CVV cannot be empty').optional().notEmpty(),
-    validateErrors
+    validateErrorsGeneral
 ]
 
 export const addBillValidator=[
