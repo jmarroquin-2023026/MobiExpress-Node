@@ -74,8 +74,6 @@ export const addProductValidator = [
         .notEmpty(),
     body('stock','Stock cannot be empty')
         .notEmpty(),
-    body('datesAvalible','Dates Avalible cannot be empty')
-        .notEmpty(),
     body('discount')
         .optional(),
     validateErrors
@@ -87,7 +85,6 @@ export const productUpdateValidator=[
     body('price','Price cannot be empty').optional().notEmpty(),
     body('category','Category cannot be empty').optional().notEmpty(),
     body('stock','Stock cannot be empty').optional().notEmpty(),
-    body('datesAvalible','Dates Avalible cannot be empty').optional().notEmpty(),
     body('discount')
     .optional(),
     validateErrors
