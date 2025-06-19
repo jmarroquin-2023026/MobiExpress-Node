@@ -29,61 +29,56 @@ export const calculateDisponibility = async(req,res)=>{
 }
 
 export const addOrder = async (req, res) => {
-    try {
-        const user = req.user.uid
-        const { products, ...data } = req.body
+  try {
+    const user = req.user.uid
+    const { products, ...data } = req.body
 
-        if (!products || products.length === 0) {
-            return res.status(400).send({ message: "Shopping cart is empty" })
-        }
-
-        if (!data.dueDate || !data.returnDate) {
-            return res.status(400).send({ message: "dueDate and returnDate are required" })
-        }
-
-        let total = 0
-
-        for (const item of products) {
-            const { product: productId, quantity } = item
-
-            const product = await Products.findById(productId)
-            if (!product) {
-                return res.status(404).send({ message: `Product not found` })
-            }
-
-            if (product.stock < quantity) {
-                return res.status(400).send({ message: `Not enough stock for product ${product.name}` })
-            }
-
-            total += product.price * quantity
-        }
-
-        for (const item of products) {
-            const { product: productId, quantity } = item
-
-            const product = await Products.findById(productId)
-            product.stock -= quantity
-            await product.save()
-        }
-
-        const order = new Order({
-            user,
-            products,
-            total,
-            ...data
-        })
-
-        await order.save()
-
-        return res.status(201).send({
-            success: true,
-            message: "Order created successfully",
-            order,
-        })
-    } catch (e) {
-        console.error(e)
-        return res.status(500).send({success:false, message: "Internal server error", e })
+    if (!products || products.length === 0) {
+      return res.status(400).send({ success: false, message: 'El carrito de compras está vacío' })
     }
+
+    if (!data.dueDate || !data.returnDate) {
+      return res.status(400).send({ success: false, message: 'Las fechas de entrega y devolución son obligatorias' })
+    }
+
+    let total = 0
+
+    for (const item of products) {
+      const { product: productId, quantity } = item
+
+      const product = await Products.findById(productId)
+      if (!product) return res.status(404).send({ success: false, message: `Producto no encontrado` })
+
+      if (product.stock < quantity) {
+        return res.status(400).send({ success: false, message: `Stock insuficiente para el producto ${product.name}` })
+      }
+
+      total += product.price * quantity
+    }
+
+    // Descontar stock
+    for (const item of products) {
+      const { product: productId, quantity } = item
+      const product = await Products.findById(productId)
+      product.stock -= quantity
+      await product.save()
+    }
+
+    const order = new Order({ user, products, total, ...data })
+    await order.save()
+
+    // ✅ POPULATE después de guardar para devolver el usuario con nombre
+    const populatedOrder = await Order.findById(order._id).populate('user', 'name surname -_id')
+
+    return res.status(201).send({
+      success: true,
+      message: 'Pedido creado correctamente',
+      order: populatedOrder
+    })
+  } catch (e) {
+    console.error(e)
+    return res.status(500).send({ success: false, message: 'Error interno del servidor', e })
+  }
 }
 
 
