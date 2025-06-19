@@ -187,3 +187,27 @@ export const updateOrderStatus = async (req, res) => {
         return res.status(500).send({ message: "Internal server error", e })
     }
 }
+
+export const listOrderByUser=async(req,res)=>{
+    try{
+        const user=req.user.uid
+        const{limit=20,skip=0}=req.query
+        const orders=await Order.find({user}).populate('user','name surname -_id')
+        .limit(limit)
+        .skip(skip)
+
+        if(orders.length===0)return res.status(404).send({
+            success:false,
+            message:'Aún no cuenta con pedidos registrados'
+        })
+
+        return res.status(200).send({
+            success:true,
+            message:'Sus pedidos son:',
+            orders
+        })
+    }catch(e){
+        return res.status(500).send({ message: 'Error listing orders', e })
+    }
+}
+
