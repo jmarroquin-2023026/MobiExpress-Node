@@ -18,9 +18,6 @@
             type: Number,
             required: [true, 'Price is required']
         },
-        datesAvalible:[{
-            type: Date,
-        }],
         brand: {
             type: String,
             required: [true, 'Branch is required']
