@@ -3,7 +3,7 @@ import {Schema, model} from 'mongoose'
 const orderSchema = Schema({
     user:{
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
         required: true
     },
     products:[{
@@ -28,7 +28,8 @@ const orderSchema = Schema({
     },
     status:{
         type:String,
-        enum:['in_enum', 'returned']
+        enum:['in_enum', 'returned'],
+        default:'in_enum'
     },
     total:{
         type:Number,
