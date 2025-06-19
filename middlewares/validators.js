@@ -19,7 +19,10 @@ export const isAdminOr = async(req,res,next)=>{
         let {id} = req.params
         if(user.role === 'ADMIN'){
             next()
-        }else if(user.uid != id)return res.send({success:false,message:'This is not your own profile'})
+        }else if(user.uid != id){return res.send({success:false,message:'This is not your own profile'})
+        }else{
+            next()
+        }
     } catch (error) {
         console.log(error);
         return res.status(401).send({success:false,message:'Error whit authenticating'})
