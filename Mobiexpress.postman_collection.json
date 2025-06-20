@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1a8eac23-caf6-4fa7-9b9f-59b570ec9db5",
+		"_postman_id": "b8e45db5-f452-49b4-9391-4072a99555f8",
 		"name": "Mobiexpress",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -415,7 +415,7 @@
 								{
 									"key": "profilePicture",
 									"type": "file",
-									"src": "postman-cloud:///1efe0220-7230-4460-912e-98438f04329b"
+									"src": "postman-cloud:///1f043219-f74d-4060-94ca-22bdc01f5678"
 								}
 							]
 						},
@@ -545,7 +545,7 @@
 								},
 								{
 									"key": "category",
-									"value": "685398d5db23086c9c011dfd",
+									"value": "684b3af3f1d13c760a8fdea1",
 									"type": "text"
 								},
 								{
@@ -667,82 +667,9 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Order",
-			"item": [
-				{
-					"name": "AddOrder",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"products\": [\r\n    {\"product\":\"6853997edb23086c9c011e17\",\"quantity\":10}\r\n  ],\r\n  \"dueDate\":\"2025-06-14\",\r\n  \"returnDate\":\"2025-06-16\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:2636/v1/order/add",
-							"host": [
-								"localhost"
-							],
-							"port": "2636",
-							"path": [
-								"v1",
-								"order",
-								"add"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "getOrder",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "localhost:2636/v1/order/",
-							"host": [
-								"localhost"
-							],
-							"port": "2636",
-							"path": [
-								"v1",
-								"order",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getOrderById",
+					"name": "getById",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -760,24 +687,46 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "localhost:2636/v1/order/68507d33d264469aa7df4507",
+							"raw": "http://localhost:2636/v1/products/getById/6853997edb23086c9c011e17",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
 								"v1",
-								"order",
-								"68507d33d264469aa7df4507"
+								"products",
+								"getById",
+								"6853997edb23086c9c011e17"
 							]
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Cards",
+			"item": [
 				{
-					"name": "updateStatus",
+					"name": "AddCard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "authorization",
@@ -789,29 +738,102 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "status",
-									"value": "returned",
+									"key": "titular",
+									"value": "Juan Carlos Méndez López",
+									"type": "text"
+								},
+								{
+									"key": "number",
+									"value": "4532987612345678",
+									"type": "text"
+								},
+								{
+									"key": "expirationDate",
+									"value": "2035-06-15",
+									"type": "text"
+								},
+								{
+									"key": "cvv",
+									"value": "728",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:2636/v1/order/68507d33d264469aa7df4507",
+							"raw": "localhost:2636/v1/cards/addCard",
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
 								"v1",
-								"order",
-								"68507d33d264469aa7df4507"
+								"cards",
+								"addCard"
 							]
-						}
+						},
+						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
 					},
 					"response": []
 				},
 				{
-					"name": "getOrderByUser",
+					"name": "DeleteCard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2636/v1/cards/deleteCard/684e849618a6907d507cc18b",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"v1",
+								"cards",
+								"deleteCard",
+								"684e849618a6907d507cc18b"
+							]
+						},
+						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bills",
+			"item": [
+				{
+					"name": "GetBillByUser",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -825,19 +847,118 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": ""
+							"mode": "urlencoded",
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "localhost:2636/v1/order/list",
+							"raw": "localhost:2636/v1/bill/getBill/684e8e1b768a537f807a5252",
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
 								"v1",
-								"order",
-								"list"
+								"bill",
+								"getBill",
+								"684e8e1b768a537f807a5252"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddBill",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "date",
+									"value": "2025-06-15",
+									"type": "text"
+								},
+								{
+									"key": "NIT",
+									"value": "5478965-3",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "684e82715fa87ecae82861e1",
+									"type": "text"
+								},
+								{
+									"key": "products",
+									"value": "[{\"product\":\"684e87c3da4a641aaceab651\", \"quantity\":2}]",
+									"type": "text"
+								},
+								{
+									"key": "total",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2636/v1/bill/addBill",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"v1",
+								"bill",
+								"addBill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteBill",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "total",
+									"value": "150",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2636/v1/bill/updateBill/684e8e1b768a537f807a5252",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"v1",
+								"bill",
+								"updateBill",
+								"684e8e1b768a537f807a5252"
 							]
 						}
 					},

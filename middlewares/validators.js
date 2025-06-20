@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { existCategory, existsEmail,existsUser, existProduct } from "../utils.js/db.validators.js";
+import { existCategory, existsEmail,existsUser, existProduct, existCard } from "../utils.js/db.validators.js";
 import { validateErrors,validateErrorsGeneral, validateErrorsWhitoutFiles } from "./validate.error.js";
 export const isMyProfile=async(req,res,next)=>{
     try {
@@ -19,7 +19,10 @@ export const isAdminOr = async(req,res,next)=>{
         let {id} = req.params
         if(user.role === 'ADMIN'){
             next()
-        }else if(user.uid != id)return res.send({success:false,message:'This is not your own profile'})
+        }else if(user.uid != id){return res.send({success:false,message:'This is not your own profile'})
+        }else{
+            next()
+        }
     } catch (error) {
         console.log(error);
         return res.status(401).send({success:false,message:'Error whit authenticating'})
@@ -90,5 +93,33 @@ export const productUpdateValidator=[
     body('datesAvalible','Dates Avalible cannot be empty').optional().notEmpty(),
     body('discount')
     .optional(),
+    validateErrors
+]
+
+export const addCardValidator=[
+    body('titular','Titular cannot be empty').optional().notEmpty(),
+    body('number','Number cannot be empty').optional().notEmpty().custom(existCard),
+    body('expirationDate','Expiration Date cannot be empty').optional().notEmpty(),
+    validateErrorsGeneral
+]
+
+export const addBillValidator=[
+    body('date','Date cannot be empty').optional().notEmpty(),
+    body('NIT','NIT cannot be empty').optional().notEmpty().isLength({max:9}),
+    body('user','User cannot be empty').optional().notEmpty(),
+    body('products','Products cannot be empty').optional().notEmpty(),
+    body('total','Total cannot be empty').optional().notEmpty(),
+    body('status','Status cannot be empty').optional().notEmpty(),
+    validateErrors
+]
+
+
+export const billUpdateValidator=[
+    body('date','Date cannot be empty').optional().notEmpty(),
+    body('NIT','NIT cannot be empty').optional().notEmpty().isLength({max:9}),
+    body('user','User cannot be empty').optional().notEmpty(),
+    body('products','Products cannot be empty').optional().notEmpty(),
+    body('total','Total cannot be empty').optional().notEmpty(),
+    body('status','Status cannot be empty').optional().notEmpty(),
     validateErrors
 ]

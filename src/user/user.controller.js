@@ -2,6 +2,7 @@ import User from "./user.model.js";
 import { checkPassword, encrypt } from "../../utils.js/encrypt.js";
 import { join} from 'path'
 import { unlink } from 'fs/promises'
+import { serialize } from "v8";
 
 const addAdmin = async () => {
     try {
@@ -176,5 +177,36 @@ export const changeProfilePicture = async(req,res,error)=>{
     } catch (error) {
         console.log(error)
         deleteFileOnError(error,req,res,'hi')
+    }
+ }
+
+ export const findUsername = async(req,res)=>{
+    try {
+        
+        let {username}=req.body
+        console.log(req.body);
+        
+        let user = await User.findOne({username:username})
+        
+        if(user) return res.status(404).send({success:false,message:'This username already exist'})
+        return res.send({success:true,message:'El Usuario no existe'})
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({success:false,message:'General error searching the user'})
+    }
+ }
+
+ export const findEmail = async(req,res)=>{
+    try {
+        let {email}=req.body
+        console.log(req.body);
+        
+        let user = await User.findOne({email:email})
+        
+        if(user) return res.status(404).send({success:false,message:'This email already exist'})
+        return res.send({success:true,message:'El Email no existe'})
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({success:false,message:'General error searching the user'})
     }
  }
