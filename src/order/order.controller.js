@@ -90,7 +90,7 @@ export const addOrder = async (req, res) => {
 export const getOrder = async(req,res)=>{
     try{
         const{limit = 20, skip = 0} = req.query
-        let report=await Order.find()
+        let report=await Order.find().populate('user','name surname -_id')
             .skip(skip)
             .limit(limit)
 
@@ -213,3 +213,26 @@ export const makeBill = async (user, products, total, nit) => {
     throw new Error('General error making the bill: ' + error.message)
   }
 }
+export const listOrderByUser=async(req,res)=>{
+    try{
+        const user=req.user.uid
+        const{limit=20,skip=0}=req.query
+        const orders=await Order.find({user}).populate('user','name surname -_id')
+        .limit(limit)
+        .skip(skip)
+
+        if(orders.length===0)return res.status(404).send({
+            success:false,
+            message:'Aún no cuenta con pedidos registrados'
+        })
+
+        return res.status(200).send({
+            success:true,
+            message:'Sus pedidos son:',
+            orders
+        })
+    }catch(e){
+        return res.status(500).send({ message: 'Error listing orders', e })
+    }
+}
+

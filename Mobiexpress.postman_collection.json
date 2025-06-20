@@ -1,11 +1,19 @@
 {
 	"info": {
+<<<<<<< HEAD
 		"_postman_id": "ef25e7c0-9539-4f0d-8e8e-61ffbab39559",
 		"name": "Mobiexpress",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37956979",
 		"_collection_link": "https://a22222-7420.postman.co/workspace/2~2931e595-e44c-4b9c-b8ce-455a81ae93ab/collection/37956979-ef25e7c0-9539-4f0d-8e8e-61ffbab39559?action=share&source=collection_link&creator=37956979"
+=======
+		"_postman_id": "1a8eac23-caf6-4fa7-9b9f-59b570ec9db5",
+		"name": "Mobiexpress",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37956961"
+>>>>>>> ft/josue-2023026
 	},
 	"item": [
 		{
@@ -672,6 +680,7 @@
 			]
 		},
 		{
+<<<<<<< HEAD
 			"name": "Cards",
 			"item": [
 				{
@@ -691,6 +700,12 @@
 							}
 						}
 					],
+=======
+			"name": "Order",
+			"item": [
+				{
+					"name": "AddOrder",
+>>>>>>> ft/josue-2023026
 					"request": {
 						"method": "POST",
 						"header": [
@@ -701,6 +716,7 @@
 							}
 						],
 						"body": {
+<<<<<<< HEAD
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
@@ -727,21 +743,41 @@
 						},
 						"url": {
 							"raw": "localhost:2636/v1/cards/addCard",
+=======
+							"mode": "raw",
+							"raw": "{\r\n  \"products\": [\r\n    {\"product\":\"6853997edb23086c9c011e17\",\"quantity\":10}\r\n  ],\r\n  \"dueDate\":\"2025-06-14\",\r\n  \"returnDate\":\"2025-06-16\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2636/v1/order/add",
+>>>>>>> ft/josue-2023026
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
 								"v1",
+<<<<<<< HEAD
 								"cards",
 								"addCard"
 							]
 						},
 						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+=======
+								"order",
+								"add"
+							]
+						}
+>>>>>>> ft/josue-2023026
 					},
 					"response": []
 				},
 				{
+<<<<<<< HEAD
 					"name": "DeleteCard",
 					"event": [
 						{
@@ -760,6 +796,14 @@
 					],
 					"request": {
 						"method": "DELETE",
+=======
+					"name": "getOrder",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+>>>>>>> ft/josue-2023026
 						"header": [
 							{
 								"key": "authorization",
@@ -769,6 +813,7 @@
 						],
 						"body": {
 							"mode": "raw",
+<<<<<<< HEAD
 							"raw": "",
 							"options": {
 								"raw": {
@@ -778,12 +823,19 @@
 						},
 						"url": {
 							"raw": "localhost:2636/v1/cards/deleteCard/684e849618a6907d507cc18b",
+=======
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:2636/v1/order/",
+>>>>>>> ft/josue-2023026
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
 								"v1",
+<<<<<<< HEAD
 								"cards",
 								"deleteCard",
 								"684e849618a6907d507cc18b"
@@ -800,6 +852,17 @@
 			"item": [
 				{
 					"name": "GetBillByUser",
+=======
+								"order",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderById",
+>>>>>>> ft/josue-2023026
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -817,22 +880,32 @@
 							"urlencoded": []
 						},
 						"url": {
+<<<<<<< HEAD
 							"raw": "localhost:2636/v1/bill/getBill/684e8e1b768a537f807a5252",
+=======
+							"raw": "localhost:2636/v1/order/68507d33d264469aa7df4507",
+>>>>>>> ft/josue-2023026
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
 								"v1",
+<<<<<<< HEAD
 								"bill",
 								"getBill",
 								"684e8e1b768a537f807a5252"
+=======
+								"order",
+								"68507d33d264469aa7df4507"
+>>>>>>> ft/josue-2023026
 							]
 						}
 					},
 					"response": []
 				},
 				{
+<<<<<<< HEAD
 					"name": "AddBill",
 					"request": {
 						"method": "POST",
@@ -895,6 +968,9 @@
 				},
 				{
 					"name": "DeleteBill",
+=======
+					"name": "updateStatus",
+>>>>>>> ft/josue-2023026
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -908,23 +984,70 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
+<<<<<<< HEAD
 									"key": "total",
 									"value": "150",
+=======
+									"key": "status",
+									"value": "returned",
+>>>>>>> ft/josue-2023026
 									"type": "text"
 								}
 							]
 						},
 						"url": {
+<<<<<<< HEAD
 							"raw": "localhost:2636/v1/bill/updateBill/684e8e1b768a537f807a5252",
+=======
+							"raw": "localhost:2636/v1/order/68507d33d264469aa7df4507",
+>>>>>>> ft/josue-2023026
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
 								"v1",
+<<<<<<< HEAD
 								"bill",
 								"updateBill",
 								"684e8e1b768a537f807a5252"
+=======
+								"order",
+								"68507d33d264469aa7df4507"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderByUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:2636/v1/order/list",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"v1",
+								"order",
+								"list"
+>>>>>>> ft/josue-2023026
 							]
 						}
 					},
