@@ -186,4 +186,14 @@ export const deleteProduct = async(req, res)=>{
     }   
 }
 
-
+export const getProductById = async(req,res)=>{
+    try {
+        let {id} = req.params
+        let product = await Product.findById(id)
+        if(!product) return res.status(404).send({success:false,message:'Product not found'})
+        return res.send({success:true,message:product})
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({success:false,message:'General error searching the product'})        
+    }
+}

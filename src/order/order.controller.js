@@ -188,30 +188,28 @@ export const updateOrderStatus = async (req, res) => {
     }
 }
 
-export const makeBill= async(user,products,total,nit)=>{
-    try {
-        let billProducts=[]
-        for (const item of products){
-            const product = await Products.findById(item.productId)
-            let billItem = {
-                products:item.productId,
-                quantity:item.quantity,
-                subTotal:item.quantity * product.price
-            }
-            billProducts.push(billItem)
-        }
-        let bill = new Bill(
-            {
-                date:Date.now,
-                NIT:nit,
-                user:user,
-                products:billProducts,
-                total:total,
-                status:true
-            }
-        )
-        await bill.save()
-    } catch (error) {
-        return res.status(500).send({success:false,message:'General error making the bill'})
+export const makeBill = async (user, products, total, nit) => {
+  try {
+    let billProducts = []
+    for (const item of products) {
+      const product = await Products.findById(item.product)
+      let billItem = {
+        products: item.product,
+        quantity: item.quantity,
+        subTotal: item.quantity * product.price
+      }
+      billProducts.push(billItem)
     }
+    let bill = new Bill({
+      date: Date.now(),
+      NIT: nit,
+      user: user,
+      products: billProducts,
+      total: total,
+      status: true
+    })
+    await bill.save()
+  } catch (error) {
+    throw new Error('General error making the bill: ' + error.message)
+  }
 }
