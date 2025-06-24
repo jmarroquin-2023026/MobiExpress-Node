@@ -28,7 +28,7 @@ const orderSchema = Schema({
     },
     status:{
         type:String,
-        enum:['in_enum', 'returned'],
+        enum:['in_enum', 'returned','cancelled'],
         default:'in_enum'
     },
     total:{

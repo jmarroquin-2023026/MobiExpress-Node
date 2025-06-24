@@ -144,8 +144,9 @@ export const updateOrderStatus = async (req, res) => {
         const { id } = req.params
         const { status } = req.body
 
-        if (!['in_use', 'returned'].includes(status)) {
-            return res.status(400).send({ message: "Invalid status. Must be 'in_use' or 'returned'." })
+        const validStatuses = ['in_use', 'returned', 'cancelled']
+        if (!validStatuses.includes(status)) {
+            return res.status(400).send({ message: "Invalid status. Must be 'in_use', 'returned' or 'cancelled'." })
         }
 
         const order = await Order.findById(id)
@@ -157,12 +158,14 @@ export const updateOrderStatus = async (req, res) => {
             return res.status(400).send({ message: `Order is already '${status}'` })
         }
 
+        // Si es "returned" o "cancelled", se regresa el stock
+        // Si es "in_use", se descuenta el stock
         for (const item of order.products) {
             const { product: productId, quantity } = item
             const product = await Products.findById(productId)
             if (!product) continue
 
-            if (status === 'returned') {
+            if (status === 'returned' || status === 'cancelled') {
                 product.stock += quantity
             } else if (status === 'in_use') {
                 if (product.stock < quantity) {
@@ -177,6 +180,10 @@ export const updateOrderStatus = async (req, res) => {
         order.status = status
         await order.save()
 
+        if (status === 'cancelled') {
+            await Bill.findOneAndDelete({ order: order._id })
+        }
+
         return res.status(200).send({
             success: true,
             message: `Order status updated to '${status}' and stock updated accordingly.`,
@@ -187,6 +194,7 @@ export const updateOrderStatus = async (req, res) => {
         return res.status(500).send({ message: "Internal server error", e })
     }
 }
+
 
 export const makeBill = async (user, products, total, nit) => {
   try {
