@@ -17,7 +17,7 @@ const addAdmin = async () => {
                 phone: '45910878',
                 role: "ADMIN",
                 address: '52av 4-83 sector sur zona 10 scp',
-                profilePicture: ''
+                profilePicture: 'DefaultUser.png'
             })
             await usuarioAdmin.save()
             console.log('Default administrator added succesfully')

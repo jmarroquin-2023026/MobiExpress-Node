@@ -158,8 +158,6 @@ export const updateOrderStatus = async (req, res) => {
             return res.status(400).send({ message: `Order is already '${status}'` })
         }
 
-        // Si es "returned" o "cancelled", se regresa el stock
-        // Si es "in_use", se descuenta el stock
         for (const item of order.products) {
             const { product: productId, quantity } = item
             const product = await Products.findById(productId)
